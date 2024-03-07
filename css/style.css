@@ -3309,11 +3309,12 @@ table thead .border-bottom-info th {
 }
 .pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item > li > a {
   text-align: left;
-  padding: 7px 10px 7px 20px;
+  padding: 5px 5px 5px 5px;
   margin: 5px 0 0;
   border-radius: 0;
-  border-left: 3px solid transparent;
+  border-left: 1px solid transparent;
 }
+
 .pcoded[theme-layout="vertical"]
   .pcoded-navbar
   .pcoded-item
@@ -6365,7 +6366,6 @@ body[themebg-pattern="theme6"] {
   > a {
   background: #2543B10D;
   color: #b7c0cd;
-  margin-left: 1rem;
 }
 .pcoded[theme-layout="vertical"]
   .pcoded-navbar[navbar-theme="theme1"][active-item-theme="theme1"]
