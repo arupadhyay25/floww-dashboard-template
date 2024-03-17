@@ -12,35 +12,72 @@
     />
     <style>
       :root {
-        --floww-font-family: "Gill Sans", "Gill Sans MT", Calibri,
-          "Trebuchet MS", sans-serif;
+        --floww-font-family: poppins, sans-serif;
         --floww-v2-navbar-height: 4rem;
-        --floww-v2-sidebar-width: 14rem;
+        --floww-v2-sidebar-width: 16rem;
         --floww-v2-navbar-bg: white;
         --floww-v2-sidebar-bg: white;
         --floww-v2-content-bg: green;
         --floww-v2-content-body-bg: white;
         --floww-v2-border-color: #e0e0e0;
       }
-
       body {
         margin: 0;
         padding: 0;
         font-family: var(--floww-font-family);
       }
-
+      /* modify scrollbar for all browswer */
+      ::-webkit-scrollbar {
+        width: 7px;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #888;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
       .floww-v2-navbar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
+      }
+      .floww-v2-navbar-marque {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: #f9f9f9;
+        background-color: #2543b1;
+      }
+      .floww-v2-navbar-marque i {
+        color: #ff8506;
+        font-size: 0.8rem;
+      }
+      .floww-v2-navbar-marque p {
+        margin: 0;
+        padding: 0;
+        font-size: small;
+        height: 1.5rem;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .floww-v2-navbar-body {
         height: var(--floww-v2-navbar-height);
         background-color: var(--floww-v2-navbar-bg);
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
         display: flex;
         align-items: center;
       }
-
       .floww-v2-right-nav {
         width: calc(100% - var(--floww-v2-sidebar-width) - 4rem);
         display: flex;
@@ -48,41 +85,137 @@
         align-items: center;
         margin-left: 2rem;
       }
-
       .floww-v2-right-nav > div:first-child {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 1rem;
       }
-
+      .floww-v2-right-nav > div:nth-child(1) > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .floww-v2-right-nav > div:last-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .floww-v2-right-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem !important;
+        font-size: 1.5rem;
+      }
+      .floww-v2-nav-profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .floww-v2-nav-profile > div:first-child {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .floww-v2-nav-profile > div:first-child img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .floww-v2-nav-profile-name p {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: small;
+      }
+      .floww-v2-nav-profile-name p:first-child {
+        font-weight: bold;
+      }
+      .floww-v2-nav-profile-name p:last-child {
+        color: gray;
+      }
+      .floww-v2-nav-profile i {
+        font-size: 1rem !important;
+      }
+      .floww-v2-right-nav-searchbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        /* border: solid 1px var(--floww-v2-border-color); */
+        border-radius: 50px;
+        padding: 0.5rem;
+        background-color: #f9f9f9;
+        padding: 0.5rem 1rem;
+      }
+      .floww-v2-right-nav-searchbar input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: #f9f9f9;
+      }
+      .floww-v2-right-nav-searchbar i {
+        color: gray;
+      }
       .floww-v2-sidebar {
         position: fixed;
-        top: var(--floww-v2-navbar-height);
-        left: -var(--floww-v2-sidebar-width);
+        top: calc(var(--floww-v2-navbar-height) + 1.5rem);
+        left: 0;
         width: var(--floww-v2-sidebar-width);
         height: 100vh;
         background-color: var(--floww-v2-sidebar-bg);
         border-right: 1px solid var(--floww-v2-border-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
         transition: left 0.5s ease-in-out;
+      }
+      .floww-v2-sidebar-body {
+        margin: 1.5rem 0.5rem 0 0.5rem;
+      }
+      .floww-v2-sidebar-dropdown {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        border: solid 1px #2543b1;
+        border-radius: 0.5rem;
+      }
+      .floww-v2-sidebar-dropdown img {
+        width: 2.5rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        object-fit: cover;
+      }
+      .floww-v2-sidebar-dropdown > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .floww-v2-sidebar-dropdown i {
+        font-size: 1rem;
+      }
+      .floww-v2-sidebar-dropdown p {
+        margin: 0;
+        padding: 0;
+        font-size: large;
+        font-weight: 550;
       }
 
       .floww-v2-content {
         margin-left: var(--floww-v2-sidebar-width);
-        margin-top: var(--floww-v2-navbar-height);
+        margin-top: calc(var(--floww-v2-navbar-height) + 1.5rem);
         background-color: var(--floww-v2-content-bg);
         transition: margin-left 0.5s ease-in-out;
       }
-
       .floww-v2-container {
         background-color: var(--floww-v2-content-body-bg);
         padding: 0.5rem 1rem;
       }
-
       .floww-v2-logo-container {
         width: var(--floww-v2-sidebar-width);
         height: var(--floww-v2-navbar-height);
@@ -90,10 +223,9 @@
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         position: relative;
       }
-
       .floww-v2-logo-container img {
         width: 50%;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0 0 2rem;
       }
 
       .floww-v2-toggle-icon {
@@ -112,72 +244,96 @@
         justify-content: center;
         align-items: center;
       }
-
-      .floww-v2-toggle-icon-in {
-        animation: rotateIn 0.5s ease-in-out;
-      }
-
-      .floww-v2-toggle-icon-out {
-        animation: rotateOut 0.5s ease-in-out;
-      }
-
       .floww-v2-vertical-line {
         width: 1px;
         height: 2rem;
         background-color: var(--floww-v2-border-color);
       }
-
-      @keyframes rotateIn {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(180deg);
-        }
+      i {
+        cursor: pointer;
       }
-
-      @keyframes rotateOut {
-        from {
-          transform: rotate(180deg);
-        }
-        to {
-          transform: rotate(0deg);
-        }
+      hr {
+        margin: 0.5rem 0;
+        border: none;
+        border-top: 1px solid var(--floww-v2-border-color);
       }
     </style>
   </head>
   <body>
     <div class="floww-v2-navbar">
-      <div class="floww-v2-logo-container">
-        <img src="./assets/logo2.png" alt="" />
-        <div class="floww-v2-toggle-icon">
-          <i class="fas fa-angle-double-right"></i>
-        </div>
+      <div class="floww-v2-navbar-marque">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>Onboarding at HR services left</p>
       </div>
-      <div class="floww-v2-right-nav">
-        <!-- Right nav content goes here -->
-        <div>
-          <div>
-            <i class="fas fa-chevron-left"></i>
-            <i class="fas fa-chevron-right"></i>
-          </div>
-          <div class="floww-v2-vertical-line"></div>
-          <div>
-            <p>Mail / Accounts</p>
+      <div class="floww-v2-navbar-body">
+        <div class="floww-v2-logo-container">
+          <img src="./assets/logo2.png" alt="" />
+          <div class="floww-v2-toggle-icon">
+            <i class="fas fa-angle-double-left floww-v2-icon"></i>
           </div>
         </div>
-        <div>
-          <input type="text" placeholder="Search" />
-        </div>
-        <div>
-          <i class="fas fa-bell"></i>
-          <i class="fas fa-user"></i>
+        <div class="floww-v2-right-nav">
+          <!-- Right nav content goes here -->
+          <div>
+            <div>
+              <i class="fas fa-chevron-left"></i>
+              <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="floww-v2-vertical-line"></div>
+            <div>
+              <p>Mail / Accounts</p>
+            </div>
+          </div>
+          <div>
+            <div class="floww-v2-right-nav-searchbar">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search for anything here" />
+            </div>
+          </div>
+          <div class="floww-v2-right-icons">
+            <div>
+              <i class="fas fa-cog"></i>
+            </div>
+            <div>
+              <i class="fas fa-bell"></i>
+            </div>
+            <div class="floww-v2-nav-profile">
+              <div>
+                <img
+                  src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="floww-v2-nav-profile-name">
+                <p>John Doe</p>
+                <p>johnDoefake@gmail.com</p>
+              </div>
+              <div>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="floww-v2-sidebar">
-      <!-- Sidebar content goes here -->
+      <div class="floww-v2-sidebar-body">
+        <!-- Sidebar content goes here -->
+        <div class="floww-v2-sidebar-dropdown">
+          <div>
+            <img
+              src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+              alt=""
+            />
+            <p>AI-Email</p>
+          </div>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <br />
+        <p>Accounting</p>
+        <hr />
+      </div>
     </div>
 
     <div class="floww-v2-content">
@@ -262,20 +418,27 @@
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const toggleIcon = document.querySelector(".floww-v2-toggle-icon");
+        const toggleIconDiv = document.querySelector(".floww-v2-toggle-icon");
+        const toggleIconIcon = document.querySelector(".floww-v2-icon");
         const sidebar = document.querySelector(".floww-v2-sidebar");
         const content = document.querySelector(".floww-v2-content");
-        let status = "opened"; // Use let instead of const for variable that will be updated
+        let status = "opened";
 
-        toggleIcon.addEventListener("click", function () {
+        toggleIconDiv.addEventListener("click", function () {
           if (status === "opened") {
             sidebar.style.left = `-${sidebar.offsetWidth}px`;
             content.style.marginLeft = "0";
             status = "closed";
+            // rotate the icon by 180 degrees with animation
+            toggleIconIcon.style.transition = "transform 0.5s ease-in-out";
+            toggleIconIcon.style.transform = "rotate(180deg)";
           } else if (status === "closed") {
             sidebar.style.left = "0";
             content.style.marginLeft = `${sidebar.offsetWidth}px`;
             status = "opened";
+            // rotate the icon by 180 degrees with animation
+            toggleIconIcon.style.transition = "transform 0.5s ease-in-out";
+            toggleIconIcon.style.transform = "rotate(0deg)";
           }
         });
       });

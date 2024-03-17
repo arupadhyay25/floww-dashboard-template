@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      font-family: "Roboto", sans-serif;
+    }
+    *:focus,
+    *:active {
+      outline: none;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    .container {
+      max-width: 1170px;
+      width: 100%;
+      padding: 50px 15px;
+      margin: 0 auto;
+    }
+
+    .dropdown {
+      max-width: 343px;
+      position: relative;
+    }
+    .dropdown__button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      line-height: 18px;
+      color: #444444;
+      width: 100%;
+      text-align: left;
+      background: #ffffff;
+      border: 1px solid #e6eaed;
+      border-radius: 4px;
+      height: 50px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 15px;
+      padding-right: 40px;
+      cursor: pointer;
+      justify-content: space-between;
+    }
+    .dropdown__button img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    .dropdown__button::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      background: url("../img/dropdown.svg") 100% 100%;
+      pointer-events: none;
+      transition: 200ms ease;
+    }
+    .dropdown__button_active::after {
+      transform: translateY(-50%) rotate(-180deg);
+    }
+    .dropdown__list {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      position: absolute;
+      left: 0;
+      top: 50px;
+      box-shadow: 0px 10px 20px 0px #88919d4d;
+      border: 1px solid #e6eaed;
+      border-radius: 4px;
+      background: #ffffff;
+      overflow: hidden;
+      width: 100%;
+      z-index: 1;
+      opacity: 0;
+      visibility: hidden;
+      transition: 200ms ease;
+      display: flex;
+    }
+    .dropdown__list img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    .dropdown__list_visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown__list-item {
+      margin: 0;
+      padding: 0;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 18px;
+      color: #444444;
+      transition: 200ms ease;
+      display: flex;
+        align-items: center;
+    }
+    .dropdown__list-item_active {
+      background: #f5f8fa;
+    }
+    .dropdown__list-item:hover {
+      background: #f5f8fa90;
+    }
+    .dropdown__input_hidden {
+      display: none;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      position: relative;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 1px solid #e6eaed;
+      transition: 600ms ease;
+    }
+    input[type="checkbox"]::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: url("https://raw.githubusercontent.com/shahriyor-sharifjonov/custom-select/master/dist/img/dropdown.svg")
+        100% 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: 300ms ease;
+    }
+    input[type="checkbox"]:checked {
+      background: #fedd2e;
+      border: 1px solid #fedd2e;
+      transition: 300ms ease;
+    }
+    input[type="checkbox"]:checked::after {
+      opacity: 1;
+      visibility: visible;
+      transition: 600ms ease;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="dropdown">
+        <button class="dropdown__button" type="button">
+            <img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg" alt="">
+            MAIL
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <ul class="dropdown__list">
+          <li class="dropdown__list-item" data-value="">
+            <img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg" alt="">
+            MAIL
+          </li>
+        </ul>
+        <input
+          class="dropdown__input_hidden"
+          type="text"
+          name="select-category"
+          value=""
+        />
+      </div>
+    </div>
+  </body>
+<script>
+    // Select all dropdown elements
+    document.querySelectorAll(".dropdown").forEach(function (dropdownWrapper) {
+        // Get dropdown button, list, items, and hidden input
+        const dropdownBtn = dropdownWrapper.querySelector(".dropdown__button");
+        const dropdownList = dropdownWrapper.querySelector(".dropdown__list");
+        const dropdownItems = dropdownList.querySelectorAll(".dropdown__list-item");
+        const dropdownInput = dropdownWrapper.querySelector(".dropdown__input_hidden");
+
+        // Toggle dropdown list visibility and button active state on button click
+        dropdownBtn.addEventListener("click", function () {
+            dropdownList.classList.toggle("dropdown__list_visible");
+            this.classList.toggle("dropdown__button_active");
+        });
+
+        // Handle item selection
+        dropdownItems.forEach(function (listItem) {
+            listItem.addEventListener("click", function (e) {
+                // Remove active state from other items
+                dropdownItems.forEach(function (el) {
+                    el.classList.remove("dropdown__list-item_active");
+                });
+                // Add active state to selected item
+                e.target.classList.add("dropdown__list-item_active");
+                // Update button text and hidden input value
+                dropdownBtn.innerText = this.innerText;
+                dropdownInput.value = this.dataset.value;
+                // Hide dropdown list
+                dropdownList.classList.remove("dropdown__list_visible");
+            });
+        });
+
+        // Hide dropdown list when clicking outside the dropdown
+        document.addEventListener("click", function (e) {
+            if (e.target !== dropdownBtn) {
+                dropdownBtn.classList.remove("dropdown__button_active");
+                dropdownList.classList.remove("dropdown__list_visible");
+            }
+        });
+
+        // Hide dropdown list on Tab or Escape key press
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Tab" || e.key === "Escape") {
+                dropdownBtn.classList.remove("dropdown__button_active");
+                dropdownList.classList.remove("dropdown__list_visible");
+            }
+        });
+    });
+</script>
+</html>
