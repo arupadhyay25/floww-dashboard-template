@@ -4,16 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Floww Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <style>
       :root {
         --floww-font-family: poppins, sans-serif;
         --floww-v2-navbar-height: 4rem;
+        --floww-v2-marquee-height: 1.5rem;
         --floww-v2-sidebar-width: 16rem;
         --floww-v2-navbar-bg: white;
         --floww-v2-sidebar-bg: white;
@@ -49,13 +45,14 @@
       }
       .floww-v2-navbar-marque {
         width: 100%;
-        height: 100%;
+        height: var(--floww-v2-marquee-height);
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
         background-color: #f9f9f9;
         background-color: #2543b1;
+        overflow: hidden;
       }
       .floww-v2-navbar-marque i {
         color: #ff8506;
@@ -72,10 +69,14 @@
         align-items: center;
       }
       .floww-v2-navbar-body {
-        height: var(--floww-v2-navbar-height);
         background-color: var(--floww-v2-navbar-bg);
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+      }
+      .floww-v2-navbar-body-content {
+        height: var(--floww-v2-navbar-height);
+        width: 100%;
         display: flex;
+        justify-content: space-between;
         align-items: center;
       }
       .floww-v2-right-nav {
@@ -163,7 +164,7 @@
       }
       .floww-v2-sidebar {
         position: fixed;
-        top: calc(var(--floww-v2-navbar-height) + 1.5rem);
+        top: calc(var(--floww-v2-navbar-height)+var(--floww-v2-marquee-height));
         left: 0;
         width: var(--floww-v2-sidebar-width);
         height: 100vh;
@@ -208,7 +209,7 @@
 
       .floww-v2-content {
         margin-left: var(--floww-v2-sidebar-width);
-        margin-top: calc(var(--floww-v2-navbar-height) + 1.5rem);
+        margin-top: calc(var(--floww-v2-navbar-height) + var(--floww-v2-marquee-height));
         background-color: var(--floww-v2-content-bg);
         transition: margin-left 0.5s ease-in-out;
       }
@@ -257,59 +258,186 @@
         border: none;
         border-top: 1px solid var(--floww-v2-border-color);
       }
+      .floww-select-menu {
+        width: calc(var(--floww-v2-sidebar-width) - 1rem);
+        box-sizing: border-box;
+        color: black;
+      }
+      .floww-select-menu .floww-select-btn {
+        display: flex;
+        height: auto;
+        background: #fff;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 400;
+        border-radius: 8px;
+        align-items: center;
+        cursor: pointer;
+        justify-content: space-between;
+        border: 1px solid #f2f2f2;
+      }
+      .floww-select-btn i {
+        font-size: 20px;
+        transition: 0.5s;
+      }
+      .floww-select-menu.active .floww-select-btn i:nth-child(2) {
+        transform: rotate(-180deg);
+      }
+      .floww-select-menu .floww-select-options {
+        position: absolute;
+        display: none;
+      }
+      .floww-select-menu.active .floww-select-options {
+        /* border: solid blue 1px; */
+        display: block;
+        gap: 0.5rem;
+        width: calc(var(--floww-v2-sidebar-width) - 1rem);
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: #fff;
+        z-index: 100;
+        border-radius: 0.5rem;
+      }
+      .floww-select-options .floww-select-option {
+        border: solid 1px #f2f2f2;
+        display: flex;
+        height: auto;
+        cursor: pointer;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border-radius: 0.5rem;
+        align-items: center;
+        background: #fff;
+      }
+      .floww-select-options .floww-select-option:hover {
+        background: #f2f2f2;
+      }
+      .floww-select-option i {
+        font-size: 20px;
+        margin-right: 12px;
+      }
+      .floww-select-option .floww-option-text {
+        font-size: 18px;
+        color: #333;
+      }
+      .floww-sBtn-text {
+        font-weight: bold;
+        padding: 0px 10px;
+      }
+      .floww-v2-sidebar-heading {
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: solid 1px #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .floww-v2-sidebar-heading p {
+        margin: 0.3rem 1rem;
+        font-size: smaller;
+        font-weight: 530;
+      }
+      .floww-v2-sidebar-heading i {
+        color: #555;
+        font-size: x-small;
+        margin-right: 0rem;
+      }
+      .floww-v2-sidebar-nav-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        padding-top: 1rem;
+      }
+      .floww-v2-sidebar-nav-items li {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: #344457;
+        opacity: 0.6;
+        /* border: solid; */
+        margin: 0 0.5rem 0 1.5rem;
+        zoom: 0.9;
+      }
+      .floww-v2-sidebar-nav-items li:hover {
+        /* background-color: #f2f2f2;
+        opacity: 1; */
+        color: #2543b1;
+        background-color: rgb(37, 67, 177, 0.05);
+        border-radius: 0.5rem;
+        opacity: 1;
+      }
+      .floww-v2-sidebar-nav-items li.active {
+        color: #2543b1;
+        background-color: rgb(37, 67, 177, 0.05);
+        border-radius: 0.5rem;
+        opacity: 1;
+        /* border-left: solid 2px #2543b1; */
+      }
+      .side-blue-border {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0.15rem;
+        height: 50%;
+        background-color: #2543b1;
+        /* make it vertically allign */
+        transform: translateY(50%);
+      }
     </style>
   </head>
   <body>
     <div class="floww-v2-navbar">
-      <div class="floww-v2-navbar-marque">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>Onboarding at HR services left</p>
-      </div>
       <div class="floww-v2-navbar-body">
-        <div class="floww-v2-logo-container">
-          <img src="./assets/logo2.png" alt="" />
-          <div class="floww-v2-toggle-icon">
-            <i class="fas fa-angle-double-left floww-v2-icon"></i>
-          </div>
+        <div class="floww-v2-navbar-marque">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>Onboarding at HR services left</p>
         </div>
-        <div class="floww-v2-right-nav">
-          <!-- Right nav content goes here -->
-          <div>
-            <div>
-              <i class="fas fa-chevron-left"></i>
-              <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="floww-v2-vertical-line"></div>
-            <div>
-              <p>Mail / Accounts</p>
+        <div class="floww-v2-navbar-body-content">
+          <div class="floww-v2-logo-container">
+            <img src="./assets/logo2.png" alt="" />
+            <div class="floww-v2-toggle-icon">
+              <i class="fas fa-angle-double-left floww-v2-icon"></i>
             </div>
           </div>
-          <div>
-            <div class="floww-v2-right-nav-searchbar">
-              <i class="fas fa-search"></i>
-              <input type="text" placeholder="Search for anything here" />
-            </div>
-          </div>
-          <div class="floww-v2-right-icons">
+          <div class="floww-v2-right-nav">
+            <!-- Right nav content goes here -->
             <div>
-              <i class="fas fa-cog"></i>
-            </div>
-            <div>
-              <i class="fas fa-bell"></i>
-            </div>
-            <div class="floww-v2-nav-profile">
               <div>
-                <img
-                  src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
-                  alt=""
-                />
+                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-right"></i>
               </div>
-              <div class="floww-v2-nav-profile-name">
-                <p>John Doe</p>
-                <p>johnDoefake@gmail.com</p>
+              <div class="floww-v2-vertical-line"></div>
+              <div>
+                <p>Mail / Accounts</p>
+              </div>
+            </div>
+            <div>
+              <div class="floww-v2-right-nav-searchbar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for anything here" />
+              </div>
+            </div>
+            <div class="floww-v2-right-icons">
+              <div>
+                <i onclick="hideMarquee()" class="fas fa-cog"></i>
               </div>
               <div>
-                <i class="fas fa-chevron-down"></i>
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="floww-v2-nav-profile">
+                <div>
+                  <img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg" alt="" />
+                </div>
+                <div class="floww-v2-nav-profile-name">
+                  <p>John Doe</p>
+                  <p>johnDoefake@gmail.com</p>
+                </div>
+                <div>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -318,32 +446,79 @@
     </div>
 
     <div class="floww-v2-sidebar">
-      <div class="floww-v2-sidebar-body">
+      <div class="">
         <!-- Sidebar content goes here -->
-        <div class="floww-v2-sidebar-dropdown">
-          <div>
-            <img
-              src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
-              alt=""
-            />
-            <p>AI-Email</p>
+        <div class="floww-v2-sidebar-selectbtn floww-v2-sidebar-body">
+          <div class="floww-select-menu">
+            <div class="floww-select-btn">
+              <div>
+                <i class="fas fa-user" style="color: #0e76a8"></i>
+                <span class="floww-sBtn-text">HR-Manager</span>
+              </div>
+              <i class="fas fa-chevron-down" style="color: #0e76a8"></i>
+            </div>
+            <ul class="floww-select-options">
+              <li class="floww-select-option">
+                <i class="fas fa-envelope" style="color: #4267b2"></i>
+                <span class="floww-option-text">Mail</span>
+              </li>
+              <li class="floww-select-option">
+                <i class="fas fa-user" style="color: #4267b2"></i>
+                <span class="floww-option-text">Accounts</span>
+              </li>
+              <li class="floww-select-option">
+                <i class="fas fa-cog" style="color: #4267b2"></i>
+                <span class="floww-option-text">Settings</span>
+              </li>
+            </ul>
           </div>
-          <i class="fas fa-chevron-down"></i>
         </div>
         <br />
-        <p>Accounting</p>
-        <hr />
+        <br />
+        <div class="floww-v2-sidebar-heading">
+          <p>AI-Email</p>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="floww-v2-sidebar-nav-items">
+          <!-- Home -->
+          <li class="active">
+            <div class="side-blue-border"></div>
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </li>
+          <!-- Accounts -->
+          <li>
+            <i class="fas fa-users"></i>
+            <span>Accounts</span>
+          </li>
+          <!-- Domain -->
+          <li>
+            <i class="fas fa-home"></i>
+            <span>Domain</span>
+          </li>
+          <!-- storage -->
+          <li>
+            <i class="fas fa-home"></i>
+            <span>Storage</span>
+          </li>
+          <!-- Ai mail -->
+          <li>
+            <i class="fas fa-home"></i>
+            <span>AI-Mail</span>
+          </li>
+          <!-- settings-->
+          <li>
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="floww-v2-content">
       <div class="floww-v2-container">
         <h1>Floww Dashboard</h1>
-        <p>
-          Floww Dashboard is a simple dashboard for your web application. It is
-          designed to be simple and easy to use. It is also customizable and can
-          be used with any web application.
-        </p>
+        <p>Floww Dashboard is a simple dashboard for your web application. It is designed to be simple and easy to use. It is also customizable and can be used with any web application.</p>
 
         <h2>Features</h2>
         <ul>
@@ -353,17 +528,10 @@
         </ul>
 
         <h2>Usage</h2>
-        <p>
-          Floww Dashboard can be used with any web application. It is simple and
-          easy to use. It is also customizable and can be used with any web
-          application.
-        </p>
+        <p>Floww Dashboard can be used with any web application. It is simple and easy to use. It is also customizable and can be used with any web application.</p>
 
         <h2>Installation</h2>
-        <p>
-          Floww Dashboard can be installed by adding the following code to your
-          web application.
-        </p>
+        <p>Floww Dashboard can be installed by adding the following code to your web application.</p>
         <pre>
         <code>
           &lt;link rel="stylesheet" href="floww-v2.css"&gt;
@@ -372,18 +540,10 @@
       </pre>
 
         <h2>Customization</h2>
-        <p>
-          Floww Dashboard can be customized by changing the root variables in
-          the CSS file. The root variables are used to set the width and height
-          of the navbar, sidebar, and content. The root variables are also used
-          to set the background color of the navbar, sidebar, and content.
-        </p>
+        <p>Floww Dashboard can be customized by changing the root variables in the CSS file. The root variables are used to set the width and height of the navbar, sidebar, and content. The root variables are also used to set the background color of the navbar, sidebar, and content.</p>
 
         <h2>License</h2>
-        <p>
-          Floww Dashboard is licensed under the MIT License. You can use it for
-          free and modify it as you like.
-        </p>
+        <p>Floww Dashboard is licensed under the MIT License. You can use it for free and modify it as you like.</p>
 
         <h2>Support</h2>
         <p>
@@ -392,22 +552,13 @@
         </p>
 
         <h2>Contribute</h2>
-        <p>
-          If you want to contribute to Floww Dashboard, you can fork the
-          repository on GitHub and submit a pull request.
-        </p>
+        <p>If you want to contribute to Floww Dashboard, you can fork the repository on GitHub and submit a pull request.</p>
 
         <h2>Download</h2>
-        <p>
-          You can download Floww Dashboard from GitHub. It is free and open
-          source.
-        </p>
+        <p>You can download Floww Dashboard from GitHub. It is free and open source.</p>
 
         <h2>GitHub</h2>
-        <p>
-          You can find the source code of Floww Dashboard on GitHub. It is free
-          and open source.
-        </p>
+        <p>You can find the source code of Floww Dashboard on GitHub. It is free and open source.</p>
 
         <h2>Feedback</h2>
         <p>
@@ -441,6 +592,31 @@
             toggleIconIcon.style.transform = "rotate(0deg)";
           }
         });
+      });
+
+      // hide marquue by making root variable --floww-v2-marquee-height: 0;
+      function hideMarquee() {
+        const root = document.documentElement;
+        if (root.style.getPropertyValue("--floww-v2-marquee-height") === "0rem") root.style.setProperty("--floww-v2-marquee-height", "1.5rem");
+        else {
+          root.style.setProperty("--floww-v2-marquee-height", "0rem");
+        }
+      }
+
+      const optionMenu = document.querySelector(".floww-select-menu"),
+        selectBtn = optionMenu.querySelector(".floww-select-btn"),
+        options = optionMenu.querySelectorAll(".floww-select-option"),
+        sBtn_text = optionMenu.querySelector(".floww-sBtn-text");
+
+      // Toggle dropdown menu on select button click
+      selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
+
+      // Close dropdown menu when clicking outside
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!optionMenu.contains(target) && target !== selectBtn) {
+          optionMenu.classList.remove("active");
+        }
       });
     </script>
   </body>
