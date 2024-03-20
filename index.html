@@ -682,6 +682,10 @@
       const navProfilePopup = document.querySelector(".floww-v2-nav-profile-popup");
       navProfile.addEventListener("click", () => {
         navProfilePopup.style.display = navProfilePopup.style.display === "block" ? "none" : "block";
+        // rotate the icon by 180 degrees with animation
+        navProfile.querySelector("i").style.transition = "transform 0.5s ease-in-out";
+        navProfile.querySelector("i").style.transform = navProfilePopup.style.display === "block" ? "rotate(180deg)" : "rotate(0deg)";
+        
       });
     </script>
   </body>
