@@ -116,6 +116,8 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
+        padding-right: 1rem;
+        cursor: pointer;
       }
       .floww-v2-nav-profile > div:first-child {
         width: 2.5rem;
@@ -331,6 +333,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-top: 1.5rem !important;
       }
       .floww-v2-sidebar-heading p {
         margin: 0.3rem 1rem;
@@ -360,7 +363,7 @@
         color: #344457;
         opacity: 0.6;
         /* border: solid; */
-        margin: 0 0.5rem 0 1.5rem;
+        margin: 0.3rem 0.5rem 0 1.5rem;
         zoom: 0.9;
       }
       .floww-v2-sidebar-nav-items li:hover {
@@ -406,6 +409,29 @@
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
         padding: 0.5rem;
         border-radius: 0.5rem;
+      }
+      .floww-v2-nav-profile-popup {
+        position: absolute;
+        width: 13rem;
+        height: auto;
+        border: solid 1px #f2f2f2;
+        border-radius: 0.5rem;
+        top: 0;
+        right: 0;
+        margin-top: calc(var(--floww-v2-navbar-height) + var(--floww-v2-marquee-height) + 0.5rem);
+        background-color: white;
+        margin-right: 1rem;
+        display: none;
+        z-index: 100;
+        padding: 1rem;
+      }
+      .floww-v2-nav-profile-popup p {
+        margin: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      .floww-v2-nav-profile-popup p:hover {
+        background-color: #f2f2f2;
       }
     </style>
   </head>
@@ -460,6 +486,11 @@
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </div>
+              <div class="floww-v2-nav-profile-popup">
+                <p>Profile</p>
+                <p>Settings</p>
+                <p>Logout</p>
+              </div>
             </div>
           </div>
         </div>
@@ -493,8 +524,6 @@
           </ul>
         </div>
       </div>
-      <br />
-      <br />
       <div class="floww-v2-sidebar-heading">
         <p>AI-Email</p>
         <i class="fas fa-chevron-down"></i>
@@ -646,6 +675,13 @@
         if (!optionMenu.contains(target) && target !== selectBtn) {
           optionMenu.classList.remove("active");
         }
+      });
+
+      // Open popup onclick of nav profile
+      const navProfile = document.querySelector(".floww-v2-nav-profile");
+      const navProfilePopup = document.querySelector(".floww-v2-nav-profile-popup");
+      navProfile.addEventListener("click", () => {
+        navProfilePopup.style.display = navProfilePopup.style.display === "block" ? "none" : "block";
       });
     </script>
   </body>
