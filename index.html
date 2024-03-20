@@ -340,13 +340,15 @@
       .floww-v2-sidebar-heading i {
         color: #555;
         font-size: x-small;
-        margin-right: 0rem;
+        margin-right: 1rem;
       }
       .floww-v2-sidebar-nav-items {
+        height: calc(100vh - var(--floww-v2-navbar-height) - var(--floww-v2-marquee-height) - 20vh);
         list-style: none;
         padding: 0;
         margin: 0;
         padding-top: 1rem;
+        /* overflow: scroll; */
       }
       .floww-v2-sidebar-nav-items li {
         position: relative;
@@ -374,7 +376,6 @@
         background-color: rgb(37, 67, 177, 0.05);
         border-radius: 0.5rem;
         opacity: 1;
-        /* border-left: solid 2px #2543b1; */
       }
       .side-blue-border {
         position: absolute;
@@ -385,6 +386,26 @@
         background-color: #2543b1;
         /* make it vertically allign */
         transform: translateY(50%);
+      }
+      .floww-v2-sidebar-footer {
+        position: absolute;
+        bottom: calc(var(--floww-v2-navbar-height) + var(--floww-v2-marquee-height));
+        left: 0;
+        width: var(--floww-v2-sidebar-width);
+        background-color: var(--floww-v2-sidebar-bg);
+      }
+      .floww-v2-sidebar-footer i {
+        font-size: 1rem;
+        margin: 0 0 1rem 1rem;
+      }
+      .floww-v2-sidebar-footer span {
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      .floww-v2-sidebar-footer div:first-child > i {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
       }
     </style>
   </head>
@@ -446,72 +467,80 @@
     </div>
 
     <div class="floww-v2-sidebar">
-      <div class="">
-        <!-- Sidebar content goes here -->
-        <div class="floww-v2-sidebar-selectbtn floww-v2-sidebar-body">
-          <div class="floww-select-menu">
-            <div class="floww-select-btn">
-              <div>
-                <i class="fas fa-user" style="color: #0e76a8"></i>
-                <span class="floww-sBtn-text">HR-Manager</span>
-              </div>
-              <i class="fas fa-chevron-down" style="color: #0e76a8"></i>
+      <!-- Sidebar content goes here -->
+      <div class="floww-v2-sidebar-selectbtn floww-v2-sidebar-body">
+        <div class="floww-select-menu">
+          <div class="floww-select-btn">
+            <div>
+              <i class="fas fa-user" style="color: #0e76a8"></i>
+              <span class="floww-sBtn-text">HR-Manager</span>
             </div>
-            <ul class="floww-select-options">
-              <li class="floww-select-option">
-                <i class="fas fa-envelope" style="color: #4267b2"></i>
-                <span class="floww-option-text">Mail</span>
-              </li>
-              <li class="floww-select-option">
-                <i class="fas fa-user" style="color: #4267b2"></i>
-                <span class="floww-option-text">Accounts</span>
-              </li>
-              <li class="floww-select-option">
-                <i class="fas fa-cog" style="color: #4267b2"></i>
-                <span class="floww-option-text">Settings</span>
-              </li>
-            </ul>
+            <i class="fas fa-sort-down" style="color: #0e76a8"></i>
           </div>
+          <ul class="floww-select-options">
+            <li class="floww-select-option">
+              <i class="fas fa-envelope" style="color: #4267b2"></i>
+              <span class="floww-option-text">Mail</span>
+            </li>
+            <li class="floww-select-option">
+              <i class="fas fa-user" style="color: #4267b2"></i>
+              <span class="floww-option-text">Accounts</span>
+            </li>
+            <li class="floww-select-option">
+              <i class="fas fa-cog" style="color: #4267b2"></i>
+              <span class="floww-option-text">Settings</span>
+            </li>
+          </ul>
         </div>
-        <br />
-        <br />
-        <div class="floww-v2-sidebar-heading">
-          <p>AI-Email</p>
-          <i class="fas fa-chevron-down"></i>
+      </div>
+      <br />
+      <br />
+      <div class="floww-v2-sidebar-heading">
+        <p>AI-Email</p>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <ul class="floww-v2-sidebar-nav-items">
+        <!-- Home -->
+        <li class="active">
+          <div class="side-blue-border"></div>
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </li>
+        <!-- Accounts -->
+        <li>
+          <i class="fas fa-users"></i>
+          <span>Accounts</span>
+        </li>
+        <!-- Domain -->
+        <li>
+          <i class="fas fa-home"></i>
+          <span>Domain</span>
+        </li>
+        <!-- storage -->
+        <li>
+          <i class="fas fa-home"></i>
+          <span>Storage</span>
+        </li>
+        <!-- Ai mail -->
+        <li>
+          <i class="fas fa-home"></i>
+          <span>AI-Mail</span>
+        </li>
+        <!-- settings-->
+        <li>
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </li>
+      </ul>
+      <!-- sidebar footer -->
+      <div class="floww-v2-sidebar-footer">
+        <div>
+          <i class="fas fa-eye-dropper"></i>
         </div>
-        <ul class="floww-v2-sidebar-nav-items">
-          <!-- Home -->
-          <li class="active">
-            <div class="side-blue-border"></div>
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </li>
-          <!-- Accounts -->
-          <li>
-            <i class="fas fa-users"></i>
-            <span>Accounts</span>
-          </li>
-          <!-- Domain -->
-          <li>
-            <i class="fas fa-home"></i>
-            <span>Domain</span>
-          </li>
-          <!-- storage -->
-          <li>
-            <i class="fas fa-home"></i>
-            <span>Storage</span>
-          </li>
-          <!-- Ai mail -->
-          <li>
-            <i class="fas fa-home"></i>
-            <span>AI-Mail</span>
-          </li>
-          <!-- settings-->
-          <li>
-            <i class="fas fa-cog"></i>
-            <span>Settings</span>
-          </li>
-        </ul>
+        <div>
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </div>
       </div>
     </div>
 
